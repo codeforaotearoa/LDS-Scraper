@@ -1,6 +1,6 @@
 ### Basic LDS Scraper
 
-Just note that this is a tiny utility for generating a list of the datasets that are on the LDS.
+Just note that this is a tiny utility for generating a list of the datasets that are on the [LINZ Data Service](https://data.linz.govt.nz).
 
 This will not let you actually scrape the LDS data itself.
 
