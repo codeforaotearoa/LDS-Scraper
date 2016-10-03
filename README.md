@@ -1,11 +1,35 @@
-### Basic LDS Scraper
+# Basic LDS Scraper
 
-Just note that this is a tiny utility for generating a list of the datasets that are on the [LINZ Data Service](https://data.linz.govt.nz).
+This is a small utility that scrapes the [LINZ Data Service](https://data.linz.govt.nz) and generates a "map" of what's available.
 
-This will not let you actually scrape the LDS data itself.
+This doesn't actually scrape the data sets themselves though. Just the metadata.
 
-I should also note that I don't know Python so this also counts as my first actual Python tool if you like.
+## How do I use it?
 
-At the moment, it only scrapes the front page for names but the results are stored as a CSV file.
+Assuming you already have [Python](https://python.org) installed, just run
 
-I intend to also add Upload Date, Views and Downloads once I learn more about BeautifulSoup and what not.
+```Python
+python scrape.py
+```
+
+and it will generate a file called names.csv
+
+**NOTE: At present, since we're learning Python while writing this, it only scrapes the first page, haha...**
+
+In future, it should scrape all available pages... It's getting there...
+
+## What does the generated CSV contain?
+
+At the moment, it has:
+
+| Metadata  |
+| --------- |
+|   Title   |
+| Downloads |
+|   Views   |
+
+## Future features?
+
+It'd be nice to have include the other metadata like description, last updated etc.
+
+Gotta have the basic features down first.
