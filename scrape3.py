@@ -1,10 +1,10 @@
 # Import the libraries we need
 from bs4 import BeautifulSoup
 import csv
-import urllib
+import urllib.request
 
 # Read from the page
-r = urllib.urlopen('https://data.linz.govt.nz/data').read()
+r = urllib.request.urlopen('https://data.linz.govt.nz/data').read()
 
 # Set up our BeautifulSoup parser. In this case, I'm using lxml over the regular htmlparser
 soup = BeautifulSoup(r, 'lxml')
@@ -33,7 +33,7 @@ for element in view_counter:
 
 # Create our new CSV in write mode
 def write():
-    print "Writing to file..."
+    print("Writing to file...")
     with open('names.csv', 'w') as csvfile:
     # Set our writer to use comma as a delimiter and create specific field names
         writer = csv.DictWriter(csvfile, delimiter=',', fieldnames=['Name', 'Date', 'Downloads', 'Views'])
@@ -43,6 +43,6 @@ def write():
         for i in xrange(len(titles)):
         # Spit that data at that index into the CSV
             writer.writerow({ 'Name': titles[i].encode('utf-8'), 'Date': 'N/A', 'Downloads': downloads[i].encode('utf-8'), 'Views': views[i].encode('utf-8') })
-    print "Done"
+    print("Done")
 
 write()
