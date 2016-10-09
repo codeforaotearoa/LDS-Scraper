@@ -42,7 +42,7 @@ def write():
     # For the length of the titles array (since there are only as many views/downloads etc as datasets)
         for i in xrange(len(titles)):
         # Spit that data at that index into the CSV
-            writer.writerow({ 'Name': titles[i].encode('utf-8'), 'Date': 'N/A', 'Downloads': downloads[i].encode('utf-8'), 'Views': views[i].encode('utf-8') })
+            writer.writerow({ 'Name': titles[i], 'Date': 'N/A', 'Downloads': downloads[i], 'Views': views[i] })
     print "Done"
 
 write()
