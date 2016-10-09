@@ -14,12 +14,14 @@ dataset_titles = soup.find_all('h4', class_='title')
 download_counter = soup.find_all('i', class_="fa fa-download")
 view_counter = soup.find_all('i', class_="fa fa-signal")
 dataset_category = soup.find_all('div', class_="publisher")
+license = soup.find_all('div', class_="licenseBox")
 
 # Specify our lists? I'm used to calling them arrays but I think in Python, they're called lists
 titles = []
 downloads = []
 views = []
 categories = []
+licenses = []
 
 # Iterate through each of the titles and get the text out of the a tags
 for element in dataset_titles:
@@ -36,18 +38,21 @@ for element in view_counter:
 for element in dataset_category:
     categories.append(element.span.a.get_text())
 
+for element in license:
+    licenses.append(element.p.a.get_text())
+
 # Create our new CSV in write mode
 def write():
     print("Writing to file...")
     with open('names.csv', 'w') as csvfile:
     # Set our writer to use comma as a delimiter and create specific field names
-        writer = csv.DictWriter(csvfile, delimiter=',', fieldnames=['Name', 'Date', 'Category', 'Downloads', 'Views'])
+        writer = csv.DictWriter(csvfile, delimiter=',', fieldnames=['Name', 'Date', 'Category', 'Downloads', 'Views', 'License'])
     # Gotta write the header, y'know
         writer.writeheader()
     # For the length of the titles array (since there are only as many views/downloads etc as datasets)
         for i in range(len(titles)):
         # Spit that data at that index into the CSV
-            writer.writerow({ 'Name': titles[i], 'Date': 'N/A', 'Category': categories[i], 'Downloads': downloads[i], 'Views': views[i] })
+            writer.writerow({ 'Name': titles[i], 'Date': 'N/A', 'Category': categories[i], 'Downloads': downloads[i], 'Views': views[i], 'License': licenses[i] })
     print("Done")
 
 write()
