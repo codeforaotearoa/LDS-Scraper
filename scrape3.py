@@ -15,26 +15,28 @@ entry = soup.find_all('tr', {'data-dojo-type':'K/editing/widgets/ModelObserver'}
 # Specify our lists? I'm used to calling them arrays but I think in Python, they're called lists
 titles = []
 categories = []
+added = []
+updated = []
 
 # Iterate through each of the titles and get the text out of the a tags
 for el in entry:
     titles.append(el.contents[1].a.get_text())
-
-for el in entry:
     categories.append(el.contents[3].a.get_text())
+    added.append(el.contents[7].time.get_text())
+    updated.append(el.contents[9].time.get_text())
 
 # Create our new CSV in write mode
 def write():
     print("Writing to file...")
     with open('names.csv', 'w') as csvfile:
     # Set our writer to use comma as a delimiter and create specific field names
-        writer = csv.DictWriter(csvfile, delimiter=',', fieldnames=['Name'])
+        writer = csv.DictWriter(csvfile, delimiter=',', fieldnames=['Name', 'Category', 'Date Added', 'Date Created'])
     # Gotta write the header, y'know
         writer.writeheader()
     # For the length of the titles array (since there are only as many views/downloads etc as datasets)
         for i in range(len(titles)):
         # Spit that data at that index into the CSV
-            writer.writerow({ 'Name': titles[i] })
+            writer.writerow({ 'Name': titles[i], 'Category': categories[i], 'Date Added': added[i], 'Date Created': updated[i] })
     print("Done")
 
 write()
